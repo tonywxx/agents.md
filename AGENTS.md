@@ -1,7 +1,3 @@
-# agents.md
-
-My AI coding AGENTS.md
-
 # AGENTS.MD
 
 ## 1. Overview
