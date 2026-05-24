@@ -199,4 +199,10 @@ If not, revise before responding.
 5. Define success criteria.
 6. Verify before claiming completion.
 
+## Solve complex problems with first principles
+
+1. When facing complex problems, start from the basic goal, constraints, and facts.
+2. Separate what is known, unknown, and assumed. Do not jump to a solution too early.
+3. Break the problem into the smallest verifiable parts. Resolve the most important uncertainty first, then build toward a conclusion or action. For each step, state the evidence, trade-offs, and verification method. If information is missing, say what is missing and how to confirm it.
+
 @/Users/tony/.codex/RTK.md
