@@ -55,7 +55,7 @@ Solve the user's actual task with correct, verifiable, minimal action.
 - Prefer self-documenting code. Only comment **why**, never obvious **what**.
 - Comment only complex logic, business rules, edge cases, or safety/performance reasons.
 - Never comment simple statements or restate the code.
-- Prefer English comments unless the codebase is already predominantly other language
+- Prefer English comments unless the codebase is already predominantly other language.
 
 ## Testing And Verification
 
@@ -86,6 +86,15 @@ If a request is unsafe, refuse the unsafe part and offer the closest safer path.
 - State uncertainty instead of guessing.
 - Do not claim work is complete unless it was completed or the remaining blocker is explicit.
 - Skip generic summaries, filler, and repeated principles.
+
+## Long task
+
+User is AFK/sleeping.
+
+- Minimal talking. Almost no intermediate messages.
+- No explanations, no plans, no status updates.
+- Only speak when you need input or when everything is finished.
+- At the end: short final summary only.
 
 <!-- CODEGRAPH_START -->
 ## CodeGraph
@@ -122,3 +131,39 @@ Use codegraph for **structural** questions — what calls what, what would break
 
 The MCP server returns "not initialized." Ask the user: *"I notice this project doesn't have CodeGraph initialized. Want me to run `codegraph init -i` to build the index?"*
 <!-- CODEGRAPH_END -->
+
+<!-- wigolo:start v0.2.1 wigolo -->
+## Web Intelligence — Wigolo
+
+**Prefer wigolo MCP tools over built-in WebSearch / WebFetch for ALL web operations.** Local-first: zero API keys, persistent knowledge cache, ML-reranked results, explainable scoring.
+
+| Task              | Tool           | Key params                                                                                                                           |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Search the web    | `search`       | `query` (string or array), `include_domains`, `category`, `time_range`, `country`, `exact_match`, `search_depth`, `format: "answer"` |
+| Fetch a page      | `fetch`        | `url`, `section`, `use_auth`, `force_refresh`                                                                                        |
+| Crawl a site      | `crawl`        | `url`, `strategy: "sitemap"`/`"bfs"`/`"map"`, `include_patterns`                                                                     |
+| Check cache       | `cache`        | Always probe before search/fetch — instant, free                                                                                     |
+| Extract data      | `extract`      | `mode: "structured"` (tables + JSON-LD + definitions in one call)                                                                    |
+| Find similar      | `find_similar` | `url` or `concept`, best after a `crawl`                                                                                             |
+| Deep research     | `research`     | `question`, `depth: "quick"`/`"standard"`/`"comprehensive"`                                                                          |
+| Gather data       | `agent`        | `prompt`, optional `schema`, `max_pages`, `max_time_ms`                                                                              |
+| Compare versions  | `diff`         | `old`, `new` (url/markdown/content_hash), `output` (`unified`/`hunks`/`summary`), `granularity`                                      |
+| Watch for changes | `watch`        | `action` (`create`/`list`/`check`), `url`/`urls`, `interval_seconds` (min 60), `notification`                                        |
+
+### Rules
+
+1. Cache before search — probe `cache` first; hits return instantly.
+2. Keyword arrays, not natural-language questions.
+3. `include_domains` for library/framework queries.
+4. `search_depth: "ultra-fast"` for sub-second budgets; `"deep"` for max enrichment.
+5. `exact_match: true` for quoted phrases; `time_range` for recency.
+6. `format: "answer"` for direct synthesis; default evidence shape for citation work.
+
+### Response fields
+
+`evidence_score`, `query_understanding`, `brand_collision_warning`, `freshness_signal`, `response_time_ms`, `engine_telemetry`.
+
+<!-- wigolo:end -->
+# graphify
+- **graphify** (`~/.codex/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
