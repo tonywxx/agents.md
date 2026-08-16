@@ -91,10 +91,13 @@ If a request is unsafe, refuse the unsafe part and offer the closest safer path.
 
 User is AFK/sleeping.
 
-- Minimal talking. Almost no intermediate messages.
-- No explanations, no plans, no status updates.
+- Minimal talking.
 - Only speak when you need input or when everything is finished.
-- At the end: short final summary only.
+- No explanations or status essays.
+- If you know the plan, show only a short progress line:
+  Progress: 3/7  or  [x] A  [ ] B  [ ] C
+- Reply almost nothing else until the end.
+- Final reply: short useful summary only.
 
 <!-- CODEGRAPH_START -->
 ## CodeGraph
